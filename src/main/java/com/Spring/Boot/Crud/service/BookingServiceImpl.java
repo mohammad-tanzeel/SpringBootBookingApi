@@ -35,7 +35,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public Booking getBooking(Long bookingId) {
 		// TODO Auto-generated method stub
-		return null;
+		return bookingdao.findById(bookingId).get();
 	}
 
 	@Override

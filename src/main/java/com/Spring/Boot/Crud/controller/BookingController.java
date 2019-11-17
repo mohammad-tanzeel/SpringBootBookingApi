@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Spring.Boot.Crud.entity.Booking;
+import com.Spring.Boot.Crud.service.BookingService;
 import com.Spring.Boot.Crud.service.BookingServiceImpl;
 
 import java.util.List;
@@ -19,34 +21,39 @@ import java.util.List;
 @RequestMapping("/tour")
 public class BookingController {
 
-//	@Autowired
-//	private BookingServiceImpl bookingService;
+	@Autowired
+	private BookingServiceImpl bookingService;
 	
 	@RequestMapping("/getdata")
 	public String getData() {
 		return "Test Data";
 	}
 	
-//	@PostMapping("/save")
-//	public Booking save(@RequestBody Booking booking) {
-//		
-//		return bookingService.saveBooking(booking);
-//	}
-//	
-//	@PutMapping("/update")
-//	public Booking update(@RequestBody Booking booking) {
-//	
-//		return bookingService.updateBooking(booking);
-//	}
-//	
-//	@GetMapping("/all")
-//	public List<Booking> getAllBooking() {
-//		return bookingService.getBookingList();
-//	}
-//	
-//	@DeleteMapping("/delete/{bookingId}")
-//	public void deleteBooking(@PathVariable(name="BookingId") Long bookingId) {
-//		bookingService.deleteBooking(bookingId);
-//	}
+	@PostMapping("/save")
+	public Booking save(@RequestBody Booking booking) {
+		
+		return bookingService.saveBooking(booking);
+	}
+	
+	@PutMapping("/update")
+	public Booking update(@RequestBody Booking booking) {
+	
+		return bookingService.updateBooking(booking);
+	}
+	
+	@GetMapping("/all")
+	public List<Booking> getAllBooking() {
+		return bookingService.getBookingList();
+	}
+	
+	@GetMapping("/by/bookingId")
+	public Booking getBooking(@PathVariable(name = "bookingId") Long bookingId) {
+		return bookingService.getBooking(bookingId);
+	}
+	
+	@DeleteMapping("/delete/{bookingId}")
+	public void deleteBooking(@PathVariable(name="BookingId") Long bookingId) {
+		bookingService.deleteBooking(bookingId);
+	}
 	
 }
