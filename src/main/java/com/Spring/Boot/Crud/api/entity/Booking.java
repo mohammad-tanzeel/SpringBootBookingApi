@@ -1,4 +1,4 @@
-package com.Spring.Boot.Crud.entity;
+package com.Spring.Boot.Crud.api.entity;
 
 import java.sql.Date;
 

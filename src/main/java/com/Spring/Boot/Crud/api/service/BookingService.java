@@ -1,7 +1,8 @@
-package com.Spring.Boot.Crud.service;
+package com.Spring.Boot.Crud.api.service;
 
 import java.util.List;
-import com.Spring.Boot.Crud.entity.Booking;
+
+import com.Spring.Boot.Crud.api.entity.Booking;
 
 public interface BookingService {
 

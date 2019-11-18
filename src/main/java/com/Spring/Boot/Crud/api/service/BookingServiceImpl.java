@@ -1,12 +1,12 @@
-package com.Spring.Boot.Crud.service;
+package com.Spring.Boot.Crud.api.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Spring.Boot.Crud.dao.BookingDao;
-import com.Spring.Boot.Crud.entity.Booking;
+import com.Spring.Boot.Crud.api.dao.BookingDao;
+import com.Spring.Boot.Crud.api.entity.Booking;
 
 @Service
 public class BookingServiceImpl implements BookingService {

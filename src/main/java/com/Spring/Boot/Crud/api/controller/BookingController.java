@@ -1,4 +1,4 @@
-package com.Spring.Boot.Crud.controller;
+package com.Spring.Boot.Crud.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Spring.Boot.Crud.entity.Booking;
-import com.Spring.Boot.Crud.service.BookingService;
-import com.Spring.Boot.Crud.service.BookingServiceImpl;
+import com.Spring.Boot.Crud.api.entity.Booking;
+import com.Spring.Boot.Crud.api.service.BookingService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/tour")
+@RequestMapping("/booking")
 public class BookingController {
 
 	@Autowired
-	private BookingServiceImpl bookingService;
+	private BookingService bookingService;
 	
 	@RequestMapping("/getdata")
 	public String getData() {
