@@ -43,5 +43,4 @@ public class BookingServiceImpl implements BookingService {
 		// TODO Auto-generated method stub
 		bookingdao.deleteById(bookingId);
 	}
-
 }

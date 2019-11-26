@@ -1,6 +1,9 @@
 package com.Spring.Boot.Crud.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,8 @@ import com.Spring.Boot.Crud.api.service.BookingService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/booking")
 public class BookingController {
@@ -27,6 +32,14 @@ public class BookingController {
 	public String getData() {
 		return "Test Data";
 	}
+	
+	@PostMapping("/customer")
+	@ResponseBody
+    public ResponseEntity<?> createCustomer(@Valid @RequestBody Booking booking){
+
+        HttpHeaders responseHeader = new HttpHeaders();
+        return new ResponseEntity<>(booking, responseHeader, HttpStatus.CREATED);
+    }
 	
 	@PostMapping("/save")
 	public Booking save(@RequestBody Booking booking) {
@@ -41,8 +54,16 @@ public class BookingController {
 	}
 	
 	@GetMapping("/all")
-	public List<Booking> getAllBooking() {
-		return bookingService.getBookingList();
+	public ResponseEntity<List<Booking>> getAllBooking() {
+		List<Booking> booking = bookingService.getBookingList();
+        if (booking.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            // You many decide to return HttpStatus.NOT_FOUND
+        }
+ 
+        return new ResponseEntity<List<Booking>>(booking, HttpStatus.OK);
+ 
+//		return bookingService.getBookingList();
 	}
 	
 	@GetMapping("/by/bookingId")

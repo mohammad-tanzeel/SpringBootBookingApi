@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class Booking {
 	private Long bookingId;
 	
 	@Column(name = "source")
+	@NotNull(message = "Please provide source Name")
 	private String source;
 	
 	@Column(name = "destination")
