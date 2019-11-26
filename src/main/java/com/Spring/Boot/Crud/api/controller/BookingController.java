@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Spring.Boot.Crud.api.entity.Booking;
+//import com.Spring.Boot.Crud.api.exception.FieldNotFoundException1;
 import com.Spring.Boot.Crud.api.service.BookingService;
 
 import java.util.List;
@@ -40,6 +41,27 @@ public class BookingController {
         HttpHeaders responseHeader = new HttpHeaders();
         return new ResponseEntity<>(booking, responseHeader, HttpStatus.CREATED);
     }
+	
+	// Save
+    @PostMapping("/savebooking")
+    Booking savebooking(@Valid @RequestBody Booking booking) {
+        return bookingService.saveBooking(booking);
+    }
+	
+//	@PostMapping("/getbooking")
+//	@ResponseBody
+//    public Booking getBooking() throws FieldNotFoundException{
+//
+//		try {
+//			Booking book = (Booking) bookingService.getBookingList();
+//			if (emp == null) {
+//				throw new FieldNotFoundException("Employee not found");
+//			}
+//			return emp;
+//		} catch (FieldNotFoundException e) {
+//			throw new FieldNotFoundException("Internal Server Exception while getting exception");
+//		}
+//    }
 	
 	@PostMapping("/save")
 	public Booking save(@RequestBody Booking booking) {
