@@ -47,6 +47,8 @@ public class CustomBookingExceptionHandler extends ResponseEntityExceptionHandle
     // @Validate For Validating Path Variables and Request Parameters
     @ExceptionHandler(ConstraintViolationException.class)
     public void constraintViolationException(HttpServletResponse response) throws IOException {
+    	System.out.println("hello tanzeeel");
+    	
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 

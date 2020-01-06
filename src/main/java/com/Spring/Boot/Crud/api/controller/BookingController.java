@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Spring.Boot.Crud.api.entity.Booking;
+import com.Spring.Boot.Crud.api.entity.BookingDTO;
 //import com.Spring.Boot.Crud.api.exception.FieldNotFoundException1;
 import com.Spring.Boot.Crud.api.service.BookingService;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -62,10 +65,14 @@ public class BookingController {
 //			throw new FieldNotFoundException("Internal Server Exception while getting exception");
 //		}
 //    }
-	
+    //@CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin
 	@PostMapping("/save")
-	public Booking save(@RequestBody Booking booking) {
-		
+	public Booking save(@RequestBody Booking booking, HttpServletRequest request) {
+		System.out.println(booking);
+		String userAgent = request.getHeader("user-agent");
+		System.out.println("Headers values"+userAgent);
+//		logger.info("whatever you want "+userAgent);
 		return bookingService.saveBooking(booking);
 	}
 	
@@ -75,6 +82,7 @@ public class BookingController {
 		return bookingService.updateBooking(booking);
 	}
 	
+//	@CrossOrigin(origins = "http://localhost:9091")
 	@GetMapping("/all")
 	public ResponseEntity<List<Booking>> getAllBooking() {
 		List<Booking> booking = bookingService.getBookingList();
@@ -88,6 +96,19 @@ public class BookingController {
 //		return bookingService.getBookingList();
 	}
 	
+	@GetMapping("/getspecific")
+	public ResponseEntity<List<BookingDTO>> getSpecificBooking() {
+		List<BookingDTO> bookingdto = bookingService.getBookingListSpecific();
+        if (bookingdto.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            // You many decide to return HttpStatus.NOT_FOUND
+        }
+ 
+        return new ResponseEntity<List<BookingDTO>>(bookingdto, HttpStatus.OK);
+ 
+//		return bookingService.getBookingList();
+	}
+
 	@GetMapping("/by/bookingId")
 	public Booking getBooking(@PathVariable(name = "bookingId") Long bookingId) {
 		return bookingService.getBooking(bookingId);
